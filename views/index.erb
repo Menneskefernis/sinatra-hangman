@@ -1,7 +1,32 @@
 <html>
   <head>
+    <style>
+      body {
+          text-align: center;
+      }
+
+      #word {
+          font-size: 24px;
+          font-weight: bold;
+          letter-spacing: 10px;
+      }
+
+      #guess {
+          width: 30px;
+      }
+
+    </style>
   </head>
   <body>
-    <p>Hello!</p>
+    <h1>Hangman!</h1>
+    <h3>Guess this word:</h3>
+    <p id="word"><%= guess_state %></p>
+    <form>
+      <input id="guess" type="text" name="guess" autofocus>
+      <input type="submit" value="Guess!">
+    </form>
+    <p>Attempts left: <%= attempts_left %></p>
+    <p><%= guessed_letters unless guessed_letters.empty? %></p>
+    <p><%= current_word.upcase %></p>
   </body>
 </html
