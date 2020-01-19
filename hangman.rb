@@ -5,7 +5,7 @@ class Game
     @words = dictionary
     @current_word = random_word
     @guess_state = initialize_string
-    @attempts_left = 12
+    @attempts_left = 10
     @end_game = false
     @guessed_letters = []
   end

@@ -27,6 +27,7 @@
         letter-spacing: 10px;
         margin-right: -10px;
         padding: 0 20px;
+        line-height: 10px;
       }
 
       #submit-guess {
@@ -65,12 +66,11 @@
       YOU GUESSED THE RIGHT WORD!
     <% end %>
     <% if lose %>
-      YOU LOST! HOW ABOUT YOU STOP LOSING?
+      YOU LOST! THE WORD WAS '<%= current_word.upcase %>'
     <% end %>
     </p>
     <form>
-    <input id="new-word" type="submit" name="submit" value="Find a New Word">
+      <input id="new-word" type="submit" name="submit" value="Find a New Word">
     </form>
-      <p><%= current_word.upcase %></p>
-    </body>
+  </body>
 </html
