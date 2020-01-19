@@ -1,5 +1,3 @@
-require 'msgpack'
-
 class Game
   attr_accessor :words, :current_word, :guess_state, :attempts_left, :end_game, :guessed_letters
   
@@ -11,12 +9,6 @@ class Game
     @end_game = false
     @guessed_letters = []
   end
-
-  #def start
-  #  until end_game || attempts_left < 1
-  #    play_round
-  #  end
-  #end
 
   def dictionary
     File.readlines('dictionary.txt')
@@ -41,14 +33,31 @@ class Game
       set_guessed_letters(input)
     else
       self.attempts_left -= 1
-      guessed_letters << input
+      guessed_letters << input.upcase unless guessed_letters.include? input.upcase
     end
   end
 
   def set_guessed_letters(input)
-    guess_state.map.each_with_index { |letter, i| input == current_word[i] ? letter : "_" }
+    positions = (0 ... current_word.length).find_all { |i| current_word[i] == input }
+
+    positions.each do |pos|
+      guess_state[pos] = input.upcase
+    end
+  end
+
+  def win?
+    if guess_state.include? "_"
+      return false
+    else
+      return true
+    end
+  end
+
+  def lose?
+    if attempts_left < 1
+      return true
+    else
+      return false
+    end
   end
 end
-
-hangman = Game.new
-puts hangman.right_guess

@@ -1,32 +1,76 @@
 <html>
   <head>
     <style>
+      * {
+          box-sizing: border-box;
+      }
+    
       body {
           text-align: center;
+          margin-top: 100px;
+      }
+
+      h1 {
+          font-size: 50px;
+          margin-bottom: 75px;
       }
 
       #word {
-          font-size: 24px;
-          font-weight: bold;
-          letter-spacing: 10px;
+          display: inline-block;
+          border: 1px solid black;
+          border-radius: 3px;
+      }
+
+      #word p {
+        font-size: 30px;
+        font-weight: bold;
+        letter-spacing: 10px;
+        margin-right: -10px;
+        padding: 0 20px;
+      }
+
+      #submit-guess {
+          margin-top: 40px;
       }
 
       #guess {
           width: 30px;
       }
 
+      #wrong-letters {
+          font-weight: bold;
+      }
+
+      #new-word {
+          margin-top: 20px;
+      }
     </style>
   </head>
   <body>
     <h1>Hangman!</h1>
     <h3>Guess this word:</h3>
-    <p id="word"><%= guess_state %></p>
-    <form>
-      <input id="guess" type="text" name="guess" autofocus>
-      <input type="submit" value="Guess!">
-    </form>
+    <div id="word">
+      <p><%= guess_state %></p>
+    </div>
+    <div id="submit-guess">
+      <form>
+        <input id="guess" type="text" name="guess" maxlength="1" autofocus>
+        <input type="submit" name="submit" value="Guess!">
+      </form>
+    </div>
     <p>Attempts left: <%= attempts_left %></p>
-    <p><%= guessed_letters unless guessed_letters.empty? %></p>
-    <p><%= current_word.upcase %></p>
-  </body>
+    <p>Wrong letters: <span id="wrong-letters"><%= guessed_letters unless guessed_letters.empty? %></span></p>
+    <p>
+    <% if win %>
+      YOU GUESSED THE RIGHT WORD!
+    <% end %>
+    <% if lose %>
+      YOU LOST! HOW ABOUT YOU STOP LOSING?
+    <% end %>
+    </p>
+    <form>
+    <input id="new-word" type="submit" name="submit" value="Find a New Word">
+    </form>
+      <p><%= current_word.upcase %></p>
+    </body>
 </html
