@@ -4,11 +4,6 @@ require_relative 'hangman'
 
 game = Game.new
 
-configure do
-  enable :sessions
-  set :session_secret, "something"
-end
-
 get '/' do
     if params["submit"] == "Guess!"
       unless game.win? || game.lose?
